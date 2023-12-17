@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div>
+        <label for="adventureLevel">Actual adventure level</label><br>
+        <select name="adventureLevel" id="adventureLevel"></select>
+        <hr>
+        <label for="adventureExp">Actual adventure EXP</label><br>
+        <input type="number" name="adventureExp" id="adventureExp" min="0" max="1880200" value="0">
+        <hr>
+        <label for="expPerDay">EXP per day</label><br>
+        <input type="number" name="expPerDay" id="expPerDay" min="0" value="2500" max="5000">
+        <hr>
+        <label for="desiredAdventureLevel">Desired adventure level</label><br>
+        <select name="desiredAdventureLevel" id="desiredAdventureLevel"></select>
+        <hr>
+        <button onclick="calculate()">Calculate</button>
+    </div>
+
+    <script src="assets/script.js"></script>
+</body>
+</html>
