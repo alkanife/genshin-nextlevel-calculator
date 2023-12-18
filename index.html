@@ -5,25 +5,106 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name="keywords" content="genshin impact, genshin, alkanife, calculator, level, levelup, level up, tool">
+    <meta name="description" content="When will you reach your next adventure rank?" />
+    <meta property="og:title" content="Genshin levelup calculator" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://alkanife.dev/genhsinlevel" />
+    <meta property="og:image" content="https://alkanife.dev/genhsinlevel/assets/media/logo.png" />
+    <meta property="og:description" content="When will you reach your next adventure rank?" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="alkanife.dev" />
+    <meta name="theme-color" content="#d3bc8e">
+    
+    <title>Genshin levelup calculator</title>
     
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="shortcut icon" href="assets/media/logo.png" type="image/x-icon">
 </head>
 <body>
-    <div>
-        <label for="adventureLevel">Actual adventure level</label><br>
-        <select name="adventureLevel" id="adventureLevel"></select>
-        <hr>
-        <label for="adventureExp">Actual adventure EXP</label><br>
-        <input type="number" name="adventureExp" id="adventureExp" min="0" max="1880200" value="0">
-        <hr>
-        <label for="expPerDay">EXP per day</label><br>
-        <input type="number" name="expPerDay" id="expPerDay" min="0" value="2500" max="5000">
-        <hr>
-        <label for="desiredAdventureLevel">Desired adventure level</label><br>
-        <select name="desiredAdventureLevel" id="desiredAdventureLevel"></select>
-        <hr>
-        <button onclick="calculate()">Calculate</button>
+    <div class="content">
+        <div class="header">
+            <img src="assets/media/logo.png" alt="">
+            <div>
+                <h1>Levelup calculator</h1>
+                <h3>When will you reach your next adventure rank?</h3>
+            </div>
+        </div>
+        
+        <div class="help">
+            <p>
+                This tool can help you determine when you will reach a certain adventure level in Genshin Impact, based on an amount of EXP you earn per day.
+            </p>
+            <p>
+                However, keep in mind that the calculation can only take into account a fixed number of EXP gained per day (resin and dailies for example).
+            </p>
+            <p>
+                The final result will therefore not take into account the quests and exploration that you do, but it's still pretty cool to have a little estimate!
+            </p>
+            <p>
+                For more information click on the buttons next to each field.
+            </p>
+        </div>
+        
+        <div class="form">
+            <div class="field">
+                <div class="head">
+                    <label for="adventureLevel">Current adventure rank</label>
+                    <button onclick="toggleHelp(this, 'helpAdventureLevel')">info</button>
+                </div>
+                <div class="info" id="helpAdventureLevel">
+                    <p>Enter the adventure rank you have today</p>
+                    <img src="assets/media/example-level.png" alt="Example">
+                </div>
+                <select name="adventureLevel" id="adventureLevel"></select>
+            </div>
+            
+            <div class="field">
+                <div class="head">
+                    <label for="adventureExp">Current adventure EXP</label>
+                    <button onclick="toggleHelp(this, 'helpAdventureExp')">info</button>
+                </div>
+                <div class="info" id="helpAdventureExp">
+                    <p>Enter your adventure EXP</p>
+                    <img src="assets/media/example-exp.png" alt="Example">
+                </div>
+                <input type="number" name="adventureExp" id="adventureExp" min="0" max="1880200" value="0">
+            </div>
+            
+            <div class="field">
+                <div class="head">
+                    <label for="expPerDay">EXP per day</label>
+                    <button onclick="toggleHelp(this, 'helpExpPerDay')">info</button>
+                </div>
+                <div class="info" id="helpExpPerDay">
+                    <p>The EXP you gain per day</p>
+                    <p>The default value (2500) means that you do daily commissions and use 5 condensed resins per day (in dungeons, or ley line outcrops...)</p>
+                </div>
+                <input type="number" name="expPerDay" id="expPerDay" min="0" value="2500" max="5000">
+            </div>
+            
+            <div class="field">
+                <div class="head">
+                    <label for="desiredAdventureLevel">Desired adventure level</label>
+                    <button onclick="toggleHelp(this, 'helpDesiredAdventureLevel')">info</button>
+                </div>
+                <div class="info" id="helpDesiredAdventureLevel">
+                    <p>The adventure rank you want to reach</p>
+                </div>
+                <select name="desiredAdventureLevel" id="desiredAdventureLevel"></select>
+            </div>
+            
+            <button onclick="calculate()" class="calculate">How many days?</button>
+            
+            <div id="result"></div>
+        </div>
+    </div>
+    <div class="credits">
+        <p>Not an official Genshin Impact website.</p>
+        <p>This website is not affiliated with COGNOSPHERE PTE. LTD.</p>
+        <a class="badge" href="https://github.com/alkanife/genshin-nextlevel-calculator">
+            <img src="https://img.shields.io/badge/View_on_GitHub-white?style=flat-square&logo=github&logoColor=black" alt="View on GitHub">
+        </a>
     </div>
 
     <script src="assets/script.js"></script>

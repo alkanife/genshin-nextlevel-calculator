@@ -67,6 +67,7 @@ const adventureLevelSelectElement = document.getElementById('adventureLevel');
 const adventureExpInputElement = document.getElementById('adventureExp');
 const expPerDayInputElement = document.getElementById('expPerDay');
 const desiredAdventureLevelSelectElement = document.getElementById('desiredAdventureLevel');
+const resultContainerElement = document.getElementById('result');
 
 /**
  * This fonction will fill the {adventureLevels} array with a series of object representing an adventure level.
@@ -110,6 +111,32 @@ function calculate() {
     let expPerDay = Number(expPerDayInputElement.value);
     let desiredAdventureLevel = Number(desiredAdventureLevelSelectElement.value);
     
+    // Check inputs
+    if (typeof expPerDay !== 'number') {
+        displayResult(false, 'nan')
+        return;
+    }
+    
+    if (adventureLevel < 1 || adventureLevel > 59) {
+        displayResult(false, 'Invalid adventure rank');
+        return;
+    }
+    
+    if (adventureExp < 0 || adventureExp > adventureLevels[adventureLevel-1].exp) {
+        displayResult(false, 'Invalid adventure EXP');
+        return;
+    }
+    
+    if (expPerDay < 10 || expPerDay > 10000) {
+        displayResult(false, 'Invalid EXP per day (must be > to 10 and < to 10000)');
+        return;
+    }
+    
+    if (desiredAdventureLevel <= adventureLevel || desiredAdventureLevel > 60) {
+        displayResult(false, 'Invalid desired AR');
+        return;
+    }
+    
     // User totals
     let totalAdventureExp = adventureLevels[adventureLevel-1].totalExp + adventureExp;
     let totalAdventureExpRequired = adventureLevels[desiredAdventureLevel-1].totalExp;
@@ -128,14 +155,29 @@ function calculate() {
     let date = new Date();
     date.setDate(date.getDate() + days);
     let dateString = date.toLocaleDateString("en-US", {
-        weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric'
     });
     
-    console.log(`Tu vas passer l'AR ${desiredAdventureLevelSelectElement.value} dans ${days} jours (${dateString})`);
-    console.log('--------------------------');
+    displayResult(true, `You will reach AR ${desiredAdventureLevel} in less than ${days} days (${dateString})!`);
+}
+
+function displayResult(success, message) {
+    let p = document.createElement('p');
+    
+    p.innerText = message;
+    
+    resultContainerElement.innerHTML = '';
+    resultContainerElement.appendChild(p);
+    resultContainerElement.style.display = 'flex';
+    resultContainerElement.className = success ? 'success' : 'error';
+    resultContainerElement.scrollIntoView();
+}
+
+function toggleHelp(button, id) {
+    document.getElementById(id).classList.toggle('visible');
+    button.classList.toggle('toggled');
 }
 
 window.onload = () => {
@@ -152,22 +194,3 @@ window.onload = () => {
     updateDesiredAdventureLevel();
     adventureLevelSelectElement.onchange = () => updateDesiredAdventureLevel();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
